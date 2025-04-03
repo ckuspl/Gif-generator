@@ -1,4 +1,4 @@
-# ✅ 適用 Vercel 的 Flask 主程式
+# ✅ 適用 Vercel 的 Flask 網頁應用
 from flask import Flask, request, send_file, Response
 from PIL import Image
 import os
@@ -41,7 +41,8 @@ HTML_PAGE = '''
 </html>
 '''
 
-@app.route("/", methods=['GET', 'POST'])  # ✅ 注意！這裡要是 "/" 而不是 "/api/index"
+# ✅ 這裡改為根目錄路由
+@app.route("/", methods=['GET', 'POST'])
 def upload():
     gif_ready = False
     error_message = ""
@@ -83,4 +84,8 @@ def upload():
         <img src="/{OUTPUT_GIF}"><br><br>
         <a href="/{OUTPUT_GIF}" download class="btn">下載動畫 GIF</a>'''
     elif error_message:
-        content = f'<p style="color: red;">
+        content = f'<p style="color: red;">{error_message}</p>'
+
+    return Response(HTML_PAGE.format(content=content), content_type='text/html')
+
+app = app
