@@ -41,7 +41,6 @@ HTML_PAGE = '''
 </html>
 '''
 
-# ✅ 這裡改為根目錄路由
 @app.route("/", methods=['GET', 'POST'])
 def upload():
     gif_ready = False
